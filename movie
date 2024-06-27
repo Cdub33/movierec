@@ -1,0 +1,66 @@
+class Movie:
+    def __init__(self, title, director, year):
+        self.title = title
+        self.director = director
+        self.year = year
+
+class MovieApp:
+    def __init__(self):
+        self.movies = []
+
+    def add_movie(self, movie):
+        self.movies.append(movie)
+        print("Movie added successfully!")
+
+    def view_movies(self):
+        if not self.movies:
+            print("No movies in the collection.")
+        else:
+            print("Movie Collection:")
+            for movie in self.movies:
+                print(f"{movie.title} ({movie.year}) - Directed by {movie.director}")
+
+    def search_movie(self, title):
+        found_movies = []
+        for movie in self.movies:
+            if title.lower() in movie.title.lower():
+                found_movies.append(movie)
+        if not found_movies:
+            print("No matching movies found.")
+        else:
+            print("Matching movies:")
+            for movie in found_movies:
+                print(f"{movie.title} ({movie.year}) - Directed by {movie.director}")
+
+# Create an instance of the movie app
+app = MovieApp()
+
+while True:
+    print("\nMovie App Menu:")
+    print("1. Add a movie")
+    print("2. View all movies")
+    print("3. Search for a movie")
+    print("4. Quit")
+
+    choice = input("Enter your choice (1-4): ")
+
+    if choice == "1":
+        title = input("Enter the movie title: ")
+        director = input("Enter the movie director: ")
+        year = input("Enter the movie year: ")
+        movie = Movie(title, director, year)
+        app.add_movie(movie)
+
+    elif choice == "2":
+        app.view_movies()
+
+    elif choice == "3":
+        title = input("Enter the movie title to search for: ")
+        app.search_movie(title)
+
+    elif choice == "4":
+        print("Goodbye!")
+        break
+
+    else:
+        print("Invalid choice. Please try again.")
